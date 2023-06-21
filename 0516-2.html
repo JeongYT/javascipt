@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn" onmouseover="chColor(this,'yellow')" onmouseout="chColor(this,'pink')">버튼1</button>
+    <button id="btn2">버튼2</button>
+
+    <script>
+        
+        function chColor(obj,color,color2) {
+            obj.style.backgroundColor=color;
+            obj.style.color=color2;
+        }
+
+        btn2.onmouseover=function() {
+            chColor(this,'red','lime')
+        }
+        btn2.onmouseout=function() {
+            chColor(this,'skyblue','beige');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 실습하기</title>
+    <style>
+        #target{
+            border:1px solid; 
+            width:400px; 
+            height:200px;
+            overflow:scroll;
+        }
+        #bookInfo{
+            border:1px solid; 
+            width:400px; 
+            height:200px;
+            overflow:scroll;
+        }
+        #jsonInfo{
+            border:1px solid; 
+            width:400px; 
+            height:200px;
+            overflow:scroll;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1> ajax 실습하기 </h1>
+    <h2> Asynchronous JavaScript and XML </h2>
+    <div id="target"> </div>
+    <button type="button" onclick="getData()">GET DATA</button>
+    <button type="button" onclick="getBook()">책정보 가져오기</button>
+    <button type="button" onclick="getJSON()">JSON 가져오기</button>
+    <div id="bookInfo"></div>
+    <div id="jsonInfo"></div>
+
+
+    <script>
+        function getData() {
+            var req = new XMLHttpRequest();
+            console.log(req);
+            req.onreadystatechange=function() {
+                if(req.readyState==4 && req.status==200){
+                    target.innerHTML=req.responseText;
+                }
+            }
+            req.open("GET",'https://jsonplaceholder.typicode.com/users',true);
+            req.send();
+        }
+
+        // setTimeout(function() {
+        //     // document.write(req.responseText);
+        //     console.log(req.responseText);
+        // },1000);
+
+
+        function getBook() {
+            var req = new XMLHttpRequest();
+            req.onreadystatechange=function() {
+                if(req.readyState==4 && req.status==200){
+                    var dom = req.responseXML;
+                    var booksE = dom.documentElement;
+                    var bookNL = booksE.getElementsByTagName('book');
+
+                    var info="";
+                    info+="<ol>";
+
+                    for(var i=0; i<bookNL.length; i++) {
+                        var bookE = bookNL.item(i);
+
+                        var bookName = bookE.getElementsByTagName('name').item(0).firstChild.nodeValue;
+                        var publisher = bookE.getElementsByTagName('publisher').item(0).firstChild.nodeValue;
+                        var author = bookE.getElementsByTagName('author').item(0).firstChild.nodeValue;
+                        var price = bookE.getElementsByTagName('price').item(0).firstChild.nodeValue;
+
+                        info += "<li>";
+                        info += bookName + "<br> - " + publisher + "<br> - " + author + "<br> - " + price;
+                        info += "</li>";
+                    }
+                    info += "</ol>";
+                    bookInfo.innerHTML=info;
+                }
+            }
+            req.open("GET","books.xml",true);
+            req.send();
+        }
+
+        function getJSON() {
+            var req = new XMLHttpRequest();
+            req.onreadystatechange=function() {
+                if(req.readyState==4 && req.status==200){
+                    var data=req.responseText;
+                    var json2=JSON.stringify(data); // 객체를 json 문자열로 반환
+                    var obj=JSON.parse(data); // JSON 문자열을 객체로 반환
+                    var book=obj.books.book;
+
+                    var out="<ol>"
+                    book.forEach((ele) => {
+                        out+=`<li>${ele.name}`;
+                        out+=`<ul><li>${ele.publisher}</li>`;
+                        out+=`<li>${ele.author}</li>`;
+                        out+=`<li>${ele.price}</li></ul>`;
+                        out+=`</li>`
+                    });
+                    out+="</ul>"
+                    jsonInfo.innerHTML=out;
+                }
+            }
+            req.open("GET","books.json",true);
+            req.send();
+        }
+
+    </script>
+</body>
+</html>

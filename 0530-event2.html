@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트모델</title>
+    <style>
+        /* div,span,button{
+            border:1px solid; 
+            padding:10px; 
+            display:block;
+        } */
+    </style>
+</head>
+
+
+<body id="body">
+    <h1> 이벤트 위임(delegation) </h1>
+    <h2> 이벤트흐름이 이벤트캡쳐링, 버블링단계를 거친다.</h2>
+    <div id="div">
+        <span id="span">
+            <button id="btn">버튼</button>
+        </span>
+    </div>
+    <hr>
+    <img id="image">
+    <h2> mouseover와 mouseenter</h2>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+
+    <style>
+        .outer {
+            width:200px;
+            height:200px;
+            border:1px solid;
+        }
+        .inner {
+            width:60%;
+            height:60%;
+            border:1px solid;
+        }
+    </style>
+    <hr>
+    <input type="text" maxlength="6">
+    <span>-</span>
+    <input type="text" maxlength="7">
+    <hr>
+    <div id="wrap">
+        <h1>마우스 이벤트 객체 속성</h1>
+        <form action="#" method="get" name="f1">
+            <fieldset>
+                <legend>커서 위치 추적</legend>
+                <p>
+                    <label for="client_x">clientX : </label>
+                    <input type="text" name="client_x" id="client_x">
+                </p>
+                <p>
+                    <label for="pg_x">pageX : </label>
+                    <input type="text" name="pg_x" id="pg_x">
+                </p>
+                <p>
+                    <label for="clienty">clientY : </label>
+                    <input type="text" name="client_y" id="client_y">
+                </p>
+                <p>
+                    <label for="pg_y">pageY : </label>
+                    <input type="text" name="pg_y" id="pg_y">
+                </p>
+            </fieldset>
+        </form>
+    </div>
+
+
+    <script src="js/0530-event2.js"></script>
+</body>
+</html>

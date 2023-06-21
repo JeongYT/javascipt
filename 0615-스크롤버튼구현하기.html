@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jQuery.js"></script>
+    <style>
+        *{ margin:0; padding:0;}
+        #wrapper{
+            position:relative;
+        }
+        div.content{
+            border:1px solid red; 
+            height:500px;
+            margin:20px;
+        }
+        button{
+            all:unset; 
+            position:fixed;
+            top:100px; 
+            right:50px; 
+            background-color: steelblue; 
+            color: white; 
+            padding:10px; 
+            border-radius: 20px;
+        }
+    
+    </style>
+    <script>
+        $(document).ready(function(){
+            $('button').hide();
+            $(window).on('scroll',function(){
+                var sct=$(this).scrollTop();
+                if(sct>200){
+                    $('#top').fadeIn();
+                    $('#buttom').fadeOut();
+                }else{
+                    $('#buttom').fadeIn();
+                    $('#top').fadeOut();
+                }
+                var oft2=$('.content').eq(1).offset().top;
+                if(sct>=oft2){
+                    $('.content').eq(1).css('font-size','50px');
+                    $('.content').eq(1).css('transition','1s');
+                }else{
+                    $('.content').eq(1).css('font-size','30px');
+                    $('.content').eq(1).css('transition','1s');
+                }
+            }); // scroll end
+            $('#top').click(function(){
+                $('html,body').animate({scrollTop:0},1000);
+            });
+            $('#buttom').click(function(){
+                var documentH=$(document).height();
+                $('html,body').animate({scrollTop:documentH},1000);
+            });
+            
+            // 스크롤 내리면 이미지 보이게 하기
+            $('img').hide();
+            $(window).on('scroll',function(){
+                var oft2=$('.content').eq(1).offset().top;
+
+                if(sct>=oft2) {
+                    $('img').animate()
+                }
+            })
+
+        }); // end
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <button id="buttom">Bottom(아래)</button>
+        <div class="content"> content1</div>
+        <div class="content"><img src="imgs/SJG.png"> content2</div>
+        <div class="content"> content3</div>
+        <div class="content"> content4</div>
+        <button id="top">Top(위)</button>
+    </div>
+</body>
+</html>

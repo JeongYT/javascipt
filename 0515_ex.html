@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/되도않음.js"></script>
+</head>
+<body>
+    <h3>덧셈 계산기</h3>
+    <form name="myform" action="..." method="post">
+        첫번째 정수 : <input id="x"><br>
+        두번째 정수 : <input id="y"><br>
+        합계 : <input id="sum"><br>
+        <input type="button" value="계산" onclick="calc()">
+    </form>
+
+    <h1 id="test">This is a heading</h1>
+    <button type="button" onclick="func()">클릭하세요!</button>
+
+    <h2>숫자 맞추기 게임</h2>
+
+    이 게임은 컴퓨터가 생성한 숫자를 맞추는 게임입니다. 숫자는 1부터 100사이에 있습니다.
+    <form>
+        숫자 : 
+        <input type="text" id="user" size="5">
+        <input type="button" value="확인" onclick="guess()">
+        추측횟수 : 
+        <input type="text" id="guesses" size="5">
+        힌트 : 
+        <input type="text" id="result" size="16">
+    </form>
+
+    <h2> 온도 변환기</h2>
+    <table border="3">
+        <tr>
+            <td>섭씨온도</td>
+            <td>화씨온도</td>
+        </tr>
+        <script>
+            for(i=0; i<=10; i++) {
+            document.write("<tr><td>"+i+"</td><td>" + parseFloat((i*9.0/5)+ 32) + "</td></tr>");
+        }
+        </script>
+    </table>
+</body>
+</html>

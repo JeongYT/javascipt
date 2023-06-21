@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab메뉴 실습</title>
+    <style>
+        *{ margin:0; padding:0; }
+        li{ list-style: none; }
+        .tab-wrapper{ width:800px; }
+        .tab-menu{ display:flex; }
+        .tab-menu li{ flex:1; border:1px solid; text-align:center; }
+        a{ text-decoration: none; display:block; padding:10px; }
+        .tab-content div{ display: none; border:1px solid; padding:10px; font-size:2em; }
+        .tab-menu li a.active{ background-color:black; color:white; }
+        #tab-1{ display:block; }
+    </style>
+    <script>
+            window.onload=function(){
+            // 클릭하면 href속성값을 tabTarget에 저장 -> #을 삭제
+            // #tab-1 -> tab-1
+            var targetLink=document.querySelectorAll('.tab-menu a');
+            var tabContent=document.querySelectorAll('.tab-content>div');
+
+            for(var i=0; i<targetLink.length; i++){
+                targetLink[i].addEventListener('click',function(){
+                    var orgTarget=event.target.getAttribute('href');
+                    console.log(orgTarget);
+                    var tabTarget=orgTarget.replace('#','');
+                    console.log(tabTarget);
+                    // 클릭안한 content 숨기기
+                    for(var j=0; j<tabContent.length; j++){
+                        tabContent[j].style.display='none';
+                    }
+                    document.getElementById(tabTarget).style.display='block';
+                    // a태그 active 추가 제거하기
+                    for(var k=0; k<targetLink.length; k++){
+                        targetLink[k].classList.remove('active');
+                    }
+                    event.target.classList.add('active');
+                });
+            }
+        } // end
+    </script>
+</head>
+<body>
+    <div class="tab-wrapper">
+        <ul class="tab-menu">
+            <li><a href="#tab-1" class="active"> menu1 </a></li>
+            <li><a href="#tab-2"> menu2 </a></li>
+            <li><a href="#tab-3"> menu3 </a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="tab-1">
+            <h2> Menu 1 </h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, nulla commodi odio itaque minus nobis quaerat esse amet quidem porro iure illum molestias labore ipsum iusto nisi a eligendi temporibus.</p>
+        </div>
+        <div id="tab-2">
+            <h2> Menu 2 </h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, nulla commodi odio itaque minus nobis quaerat esse amet quidem porro iure illum molestias labore ipsum iusto nisi a eligendi temporibus.</p>
+        </div>
+        <div id="tab-3">
+            <h2> Menu 3 </h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, nulla commodi odio itaque minus nobis quaerat esse amet quidem porro iure illum molestias labore ipsum iusto nisi a eligendi temporibus.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/0607-드롭다운.css">
+</head>
+<body>
+    <h2> Clickable Dropdown</h2>
+    <div class="dropdown">
+        <button onclick="dropDown('menu1')" class="dropbtn">Dropdown</button>
+        <div id="menu1" class="dropdown-content">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button onclick="dropDown('menu2')" class="dropbtn">Dropdown</button>
+        <div id="menu2" class="dropdown-content">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+    <script>
+        function dropDown(x){
+            document.getElementById(x).classList.toggle('show');
+            // add, remove, toggle
+        }
+
+        // 바탕을 클릭하면 메뉴숨기기
+        window.onclick=function() {
+            // dropbtn을 제외한 이벤트가 걸리면 show를 제거해라
+            if(!event.target.matches('.dropbtn')) {
+                var dropContent=document.getElementsByClassName('dropdown-content');
+                for(var i=0; i<dropContent.length; i++) {
+                    dropContent[i].classList.remove('show');
+                    if(dropContent[i].classList.contains('show')) {
+                        dropContent[i].classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

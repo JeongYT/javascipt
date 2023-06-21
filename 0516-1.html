@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/0516-1.js"></script>
+</head>
+<body>
+    <h2>버튼을 클릭했을때 배경색 변경하기</h2>
+    <button id="button" onclick="console.log(this)">버튼1</button>
+    <button id="btn" onclick="console.log(this)">버튼2</button>
+    <hr>
+    <button onclick="chColor(this,'red')">버튼3</button>
+    <button onclick="chColor(this,'blue')">버튼4</button>
+    <button onclick="chColor(this,'gold')">버튼5</button>
+    
+    <div id="d_box">박스</div>
+
+    <script>
+        function chColor(obj,color) {
+            console.log(color+"가 적용됨");
+            obj.style.color=color;
+        }
+
+
+        var color=["red","pink","blue","orange","gold"];
+
+        var body=document.getElementsByTagName('body')[0]; // 배열
+        var body=document.querySelector('body');
+
+        // 객체.이벤트타입=이벤트리스터;
+        var i=0;
+        button.onclick=function() {
+            if(i>4) i=0;
+                
+            body.style.background=color[i];
+            i++; 
+        }
+
+        // 버튼하나 만들어서 , div 박스 하나 생성해서 버튼 클릭하면
+        // 배경색 변경하게 하기
+
+        d_box.style.width="300px";
+        d_box.style.height="300px";
+        // 자바스크립트로 스타일 지정하면 인라인스타일로 지정된다.
+
+        var color2=["red","orange","yellow","green","blue","navy","purple"]
+        btn.onclick=function() {
+            // if(i>6) i=0;
+            // d_box.style.background=color2[i];
+            // i++;
+            i = i%color2.length;
+            d_box.style.backgroundColor=color2[i];
+            d_box.style.color=color2[i-1];
+            d_box.style.fontSize="30px";
+            i++;
+        }
+        function chColor2(obj,color) {
+            obj.style.backgroundColor=color;
+        }
+
+        btn.onmouseover=function() {
+            chColor2(this,'yellow');
+        }
+        btn.onmouseout=function() {
+            chColor2(this,'pink');
+        }
+        
+        
+    </script>
+</body>
+</html>
