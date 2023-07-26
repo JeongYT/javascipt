@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>방문 시간이 오전 오후에 따라 변하는 배경색</title>
+</head>
+<body>
+	<h3>오전이면 lightskyblue, 오후이면 orange 배경</h3>
+	<hr>
+	<span id="clock"></span>
+	<script>
+		function printTime() {
+			var clock = document.getElementById("clock");
+			var body = document.querySelector('body');
+			var nowDate = new Date();
+
+			clock.innerHTML = "현재 시간 : " + nowDate.getHours() + "시 " + nowDate.getMinutes() + "분 " + nowDate.getSeconds() + "초";
+
+			setTimeout("printTime()",1000);
+
+			if(nowDate.getHours() < 12) {
+				body.style.backgroundColor = 'lightskyblue';
+			} else {
+				body.style.backgroundColor = 'orange';
+			}
+		}
+        window.onload = function() {
+            printTime();
+        };
+	</script>
+</body>
+</html>

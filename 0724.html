@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 연습</title>
+    <style>
+        li span {
+            color:blue;
+        }
+        .tog {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <h2>자바스크립트란 ? <button>border</button> <button>p</button></h2>
+    <p>자바스크립트는 웹 프로그래밍 언어로서 웹 페이지를 동적 변경시킬 수 있다.</p>
+    <p><span id="mySpan">C 언어</span>를 아는 사용자는 빠르게 학습할 수 있다.</p>
+    <p>이벤트 등 GUI 프로그래밍에 필요한 요소들이 있어 학습에 약간의 어려움이 있다.</p>
+
+    <script>
+        var btn = document.querySelectorAll('button');
+        var mySpan = document.getElementById('mySpan');
+        var pNum = document.querySelectorAll('p');
+
+        btn[0].onclick=function(){
+            mySpan.style.border = '2px dotted violet';
+        }
+        btn[1].onclick=function(){
+            alert("<p> 태그의 개수는 " + pNum.length + "개 입니다.");
+        }
+
+        // function setBorder() {
+        //     mySpan.style.border = '2px dotted violet';
+        // }
+    </script>
+    <hr>
+
+    <h2>다음 빈 곳에 숨은 단어? <button>show/hide</button></h2>
+    <ul>
+        <li>I (<span class="tog">love</span>) you</li>
+        <li>CSS is Cascading (<span class="tog">Style</span>) Sheet.</li>
+        <li>응답하라 (<span class="tog">1988</span>).</li>
+    </ul>
+
+    <script>
+        var btn = document.querySelectorAll('button');
+        var span = document.querySelectorAll('span');
+        btn[2].onclick=function(){
+            for(var i=1; i<span.length; i++){
+                span[i].classList.toggle('tog');
+            }
+        }
+    </script>
+    <hr>
+
+    <h2>CSS 스타일 동적 변경</h2>
+    <p style="color:blue">이것은
+        <span id="mySpan2" style="color:red">문장입니다.</span>
+    </p>
+    <input type="button" value="스타일변경" onclick="change()">
+
+    <script>
+        var span = document.getElementById('mySpan2');
+
+        function change(){
+            span.style.color = 'green';
+            span.style.fontWeight = 'bold';
+            span.style.fontSize = '40px';
+            span.style.display = 'block';
+            span.style.width = '6em';
+            span.style.border = '3px dotted magenta';
+            span.style.margin = '20px';
+            span.style.padding = '10px';
+        }
+    </script>
+    <hr>
+
+    <h2>innerHTML 활용 : 아래 글자에 클릭하면 예쁜 강아지가 보입니다.</h2>
+    <p id="firstP" style="color:blue" onclick="change()">여기에<span style="color:red">클릭하세요</span></p>
+
+    <script>
+        function change() {
+            var p = document.getElementById('firstP');
+            p.innerHTML = "나의 <img src='imgs/dog.jpg'> 강아지";
+        }
+    </script>
+    <hr>
+
+    <h2>this 활용</h2>
+    <button onclick="change(this,'30px','red')">버튼</button>
+    <button onclick="change(this,'30px','blue')">버튼</button>
+    <div onclick="change(this,'25px','orange')">여기를 클릭하면 크기와 색 변경</button>
+
+    <!-- <script>
+        function change(a,b,c){
+            a.style.fontSize = b;
+            a.style.color=c;
+        }
+    </script> -->
+    <hr>
+
+    <h2>내가 좋아하는 과일
+        <button onclick="chg()">누르세요</button>
+    </h2>
+    <div>
+        저는 빨간 <span>사과</span>를 좋아해서
+        아침마다 한 개씩 먹고 있어요. 운동할 때는 중간 중간에
+        <span>바나나</span>를 먹지요. 탄수화물 섭취가 빨라
+        힘이 납니다. 또한 달콤한 향기를 품은 <span>체리</span>와
+        여름 냄새 물씬 나는 <span>자두</span>를 좋아합니다.
+    </div>
+    
+    <script>
+        function chg(){
+            var span = document.querySelectorAll('div>span');
+            for(var i=0; i<span.length; i++){
+                span[i].style.color='orchid';
+                span[i].style.fontSize='20px';
+            }
+        }   
+    </script>
+    <hr>
+
+    <h2>write()와 writeln()</h2>
+    <script>
+        document.write("<h3>동물원에 소풍갑시다<h3>");
+        document.write("<p style='color:blue'>날씨가 좋아 ");
+        document.write("소풍갑니다</p>");
+        document.write(2+3);
+        document.write("명입니다.<br>");
+
+        document.writeln(5);
+        document.writeln("명입니다.<br>");
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>1에서 얼마까지 더해야 3000을 넘는가</h2>
+    <script>
+        var sum=0;
+        var a=0;
+        while(true){
+            sum += a;
+            if(sum>3000)
+                break;
+            a++;
+
+            // if(sum>3000){
+            //     break;
+            // }else{
+            //     sum+=a;
+            //     if(sum<3000){
+            //         a++;
+            //     }
+            // }
+        }
+        document.write(a + "까지 더하면 3000을 넘음 : " + sum);
+    </script>
+    <hr>
+    <h2>3으로 나눈 나머지가 1인 수만 더하기</h2>
+    <script>
+        var sum=0;
+        for(var i=1; i<=10; i++){
+            if(i%3!=1)
+                continue;
+            sum+=i;
+            document.write(i + " ");
+        }
+        document.write("합은 " + sum);
+    </script>
+    <hr>
+    <h2>월화수목금토일</h2>
+    <script>
+        // var day = prompt("월화수목금토일 중에서 입력하세요.");
+
+            if(day==null){
+                alert("잘못입력하였음");
+            } else {
+                switch(day){
+                    case "월" :
+                    case "화" : 
+                    case "수" :
+                    case "목" :  
+                    case "금" :
+                        document.write(day + "요일은 출근");
+                        break;
+                    case "토" : 
+                    case "일" :
+                        document.write(day + "요일은 휴일");
+                        break;
+                    default:
+                        document.write("알수없는 문자입니다. 다시 입력해 주세요.");
+                        break;
+                }              
+            }      
+    </script>
+    <hr>
+    <h2>큰 자리수와 낮은자리수 같은지 비교</h2>
+    <script>
+        var num = prompt("숫자를 입력해주세요.",0);
+        if(isNaN(num)){
+            document.write(num + " : 숫자가 아닙니다.");
+        }else if(num==null){
+            alert("취소되었습니다.");
+        }else if(num<=0) {
+            document.write(num + " : 음수나 0은 다루지 않습니다.");
+        }else if(num>0){
+            var a=num;
+            var b=num%10;
+            while(a){
+                if(a<10)
+                    break;
+                a/=10;
+            }
+            a = parseInt(a);
+            if(a==b){
+                document.write(num + " : 같음");
+            }else{
+                document.write(num + " : 다름");
+            }
+        }
+    </script>
+
+</body>
+</html>

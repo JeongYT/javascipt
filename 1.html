@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>eval()로 수식 계산</title>
+</head>
+<body>
+	<h3>eval()로 수식 계산</h3>
+	<hr>
+	<script>
+		var answer = prompt("수식 입력","");
+		if(answer == null){
+			document.write("입력한 식이 없습니다.");
+		}else{
+			document.write(answer + " = " +  eval(answer));
+		}
+	</script>
+</body>
+</html>

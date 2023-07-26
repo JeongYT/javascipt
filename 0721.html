@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function pr(msg,arr){
+            document.write(msg + arr.toString() + "<br>");
+        }
+    </script>
+    <style>
+        div {
+            display:inline-block;
+            width:150px;
+            padding:10px;
+        }
+    </style>
+</head>
+<body id="bo">
+    <h2>[]로 배열 만들기</h2>
+    <p>var plots = [20,5,8,15,20]</p>
+    <script>
+        var plots = [20,5,8,15,20];
+
+        for(var i=0; i<plots.length; i++){
+
+            for(var j=0; j<plots[i]; j++){
+                document.write("*");
+            }
+            document.write(" " + plots[i]);
+            document.write("<br>");
+        }
+    </script>
+    <hr>
+    <h2>Array 객체로 배열 만들기</h2>
+    <script>
+        let degrees = new Array();
+        degrees[0] = 15.1;
+        degrees[1] = 15.4;
+        degrees[2] = 16.1;
+        degrees[3] = 17.5;
+        degrees[4] = 19.2;
+        degrees[5] = 21.4;
+
+        let sum = 0;
+        for(let i=0; i<degrees.length; i++)
+            sum += degrees[i];
+
+        document.write("평균 온도는 " + sum/degrees.length + "<br>");
+    </script>
+    <hr>
+    <h2>Array 객체의 메소드 활용</h2>
+    <script>
+        let a = new Array("황", "김", "이");
+        let b = new Array("박");
+        let c;
+
+        pr("배열 a = ", a);
+        pr("배열 b = ", b);
+
+        c = a.concat(b);
+        pr("c = a.concat(b)후 c = ", c);
+        pr("c = a.concat(b)후 a = ", a);
+
+        c = a.join("##");
+        pr("c = a.join()후 c = ", c);
+        pr("c = a.join()후 a = ", a);
+
+        c = a.reverse();
+        pr("c = a.reverse()후 c = ", c);
+        pr("c = a.reverse()후 a = ", a);
+
+        c = a.slice(1,2);
+        pr("c = a.slice(1,2)후 c = ", c);
+        pr("c = a.slice(1,2)후 a = ", a);
+
+        c = a.sort();
+        pr("c = a.sort()후 c = ", c);
+        pr("c = a.sort()후 a = ", a);
+
+        c = a.toString();
+        document.write("a.toString() : " + c);
+    </script>
+    <hr>
+    <h2>Date 객체로 현재 시간 알아내기</h2>
+    <script>
+        var date = new Date();
+
+        document.write("현재 시간 : " + date.toString() + "<br>");
+        document.write(date.getFullYear() + "년도<br>");
+        document.write(date.getMonth()+1 + "월<br>");
+        document.write(date.getDate() + "일<br>");
+        document.write(date.getHours() + "시<br>");
+        document.write(date.getMinutes() + "분<br>");
+        document.write(date.getSeconds() + "초<br>");
+        document.write(date.getMilliseconds() + "밀리초<br>");
+
+        var date2 = new Date("2023-08-15 12:12:12");
+        document.write("next.toLocaleString() : " + date2.toLocaleString());
+    </script>
+    <hr>
+    <h2>페이지 방문 초시간이 짝수이면 violet, 홀수이면 lightskyblue 배경</h2>
+    <script>
+        function printTime() {
+            var clock = document.getElementById("clock");
+            var bo = document.getElementById("bo");
+            var date3 = new Date();
+
+            clock.innerHTML = date3.getHours() + "시 " + 
+                            date3.getMinutes() + "분 " + 
+                            date3.getSeconds() + "초";
+            
+            setTimeout("printTime()", 1000);
+
+            // if(date3.getSeconds()%2==0){
+            //     bo.style.backgroundColor="violet";
+            // }else{
+            //     bo.style.backgroundColor="lightskyblue";
+            // }
+        }
+
+        window.onload = function() {
+            printTime();
+        };
+    </script>
+    현재 시간 : <span id="clock"></span>
+    <hr>
+    <h2>String 객체의 메소드 활용</h2>
+    <script>
+        var d = new String("Boys and Girls");
+        var e = "!!";
+
+
+        document.write("d : " + d + "<br>");
+        document.write("e : " + e + "<br>");
+        document.write(d.charAt(0) + "<br>");
+        document.write(d.concat(e, "입니다.") + "<br>");
+        document.write(d.indexOf("s") + "<br>");
+        document.write(d.indexOf("And") + "<br>");
+        document.write(d.slice(5,8) + "<br>");
+        document.write(d.substr(5,3) + "<br>");
+        document.write(d.toUpperCase() + "<br>");
+        document.write(d.replace("and","or") + "<br>");
+        document.write("     kitae      ".trim() + "<br>");
+
+        var sub = d.split(" ");
+        document.write("d를 빈칸으로 분리<br>");
+        for(var i=0; i<sub.length; i++)
+            document.write("sub" + i + " = " + sub[i] + "<br>");
+        
+        document.write("String 메소드를 실행 후 d와 e 변함 없음<br>");
+        document.write("d : " + d + "<br>");
+        document.write("e : " + e + "<br>");
+        
+    </script>
+    <hr>
+    <h2>Math를 활용한 구구단 연습</h2>
+    <script>
+        var dan = parseInt((Math.random()*9)+1);
+        var dan2 = parseInt((Math.random()*9)+1);
+        var ans = (dan*dan2);
+        // var exam = prompt(dan + "*" + dan2 + "값은 얼마입니까?", 0);
+
+        // if(exam==null){
+        //     document.write("구구단 연습을 종료합니다.");
+        // } else {
+        //     if(ans == exam){
+        //         document.write("정답! " + dan + "*" + dan2 + "=" + ans + "입니다.");
+        //     }else{
+        //         document.write("아니오! " + dan + "*" + dan2 + "=" + ans + "입니다.");
+        //     }
+        // }
+
+    </script>
+    <hr>
+    <h2>버튼을 클릭하면 이미지가 교체됩니다.</h2>
+    <script>
+        function changeImg(){
+            var num = (Math.random()*4)+1;
+            var carImg = document.getElementById('carImg');
+            
+            carImg.src="imgs/car"+parseInt(num)+".jpg";
+        }
+    </script>
+    <img src="imgs/car1.jpg" id="carImg">
+    <button onclick="changeImg()">이미지 교체하기</button>
+    <hr>
+    <script>
+        var account = {
+            owner : "황기태",
+            code : "111",
+            balance : 35000,
+
+            inquiry : function() {return this.balance;},
+            deposit : function(money) {this.balance += money;},
+            withdraw : function(money) {this.balance -= money;}
+        }
+        // function inquiry(){
+        //     return this.balance;
+        // }
+        // function deposit(money){
+        //     this.balance += money;
+        // }
+        // function withdraw(money){
+        //     this.balance -= money;
+        // }
+
+        // var account = new Object();
+        // account.owner = "황기태";
+        // account.code = "111";
+        // account.balance = 35000;
+        // account.inquiry = inquiry;
+        // account.deposit = deposit;
+        // account.withdraw = withdraw;
+    </script>
+    <h2>new Object()로 사용자 객체 만들기</h2>
+    <script>
+        document.write("account : ");
+        document.write(account.owner + ", ");
+        document.write(account.code + ", ");
+        document.write(account.balance + "<br>");
+
+        account.deposit(10000);
+        document.write("10000원 저금 후 잔액은 " + account.inquiry() + "<br>");
+        account.withdraw(5000);
+        document.write("5000원 인출 후 잔액은 " + account.inquiry() + "<br>");
+    </script>
+    <hr>
+    <script>
+        function Student(name,score){
+            this.univ = "한국대학";
+            this.name = name;
+            this.score = score;
+            this.getGrade = function() {
+                if(this.score > 80) return "A";
+                else if(this.score > 60) return "B";
+                else return "F";
+            }
+        }
+
+        var kitae = new Student("황기태",75);
+        var jaemoon = new Student("이재문",93);
+
+        document.write(kitae.univ + ", " + kitae.name + "의 학점은 " + kitae.getGrade() + "<br>");
+        document.write(jaemoon.univ + ", " + jaemoon.name + "의 학점은 " + jaemoon.getGrade() + "<br>");
+    </script>
+    <hr>
+    <h2>난수 10개 생성</h2>
+    <script>
+        var arr = new Array(10);
+        var maxNum = 0;
+        for(var i=0; i<arr.length; i++){
+            var randomNum = parseInt((Math.random()*100)+1);
+            arr[i] = randomNum;
+            document.write(arr[i] + " ");
+
+            if(arr[i]>maxNum) {
+                maxNum = arr[i];
+            }
+        }
+
+        document.write("<br>");
+        document.write("제일 큰 수는 : " + maxNum);
+        document.write("<br>");
+        arr.sort(function(a,b) {return a -b});
+        for(var i=0; i<10; i++)
+            document.write(arr[i] + " ");
+    </script>
+    <hr>
+    <h2>16개의 랜덤한 색 만들기</h2>
+    <script>
+        function newColor(){
+            var red = parseInt((Math.random()*256));
+            var green = parseInt((Math.random()*256));
+            var blue = parseInt((Math.random()*256));
+            return "rgb(" + red + "," + green + "," + blue + ")";
+        }
+        for(var i=0; i<16; i++){
+            // var str = "<div style='background-color:";
+            // var color = newColor();
+            // str += color;
+            // str += "'>" + color + "</div>";
+            // document.write(str);
+            createDiv();
+        }
+
+        function createDiv(){
+            var parent = document.getElementById("parent");
+            var newDiv = document.createElement("div");
+            newDiv.setAttribute("id","div"+i);
+            newDiv.innerHTML=newColor();
+            newDiv.style.backgroundColor=newColor();
+            document.body.appendChild(newDiv);
+        }
+    </script>
+    <hr>
+    <h2>book 객체 만들기</h2>
+    <script>
+
+
+        // document.write("book : " + book.title + ", " +  book.author + ", " + book.price);
+
+        var bookArray = new Array();
+
+        for(var i=0; i<5; i++){
+            var input = prompt("콤마(,)로 분리하면서 책제목 저자 가격 순으로 입력","HTML5,황기태,20000");
+            var ar = input.split(",");
+            var book = new Object();
+            book.title=ar[0];
+            book.author=ar[1];
+            book.price=ar[2];
+            bookArray[i] = book;
+        }
+
+        for(var i=0; i<bookArray.length; i++){
+            document.write(bookArray[i].title + ", ");
+            document.write(bookArray[i].author + ", ");
+            document.write(bookArray[i].price + "<br>");
+        }
+
+        var max = bookArray[0];
+        for(var i=1; i<bookArray.length; i++){
+            if(bookArray[i].price > max.price) {
+                max = bookArray[i];
+            }
+        }
+        document.write("가장 가격이 비싼 책은 " + max.title);
+    </script>
+</body>
+</html>

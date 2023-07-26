@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div {
+            background : skyblue;
+            line-height: 1.6em;
+            padding: 10px;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+        td {
+            padding-left:10px;
+            padding-right:10px;
+        }
+    </style>
+</head>
+<body onload="changeImage();startScroll(1000);startTimer();">
+    <h2>마우스 관련 이벤트 리스너</h2>
+    <div>마우스 관련
+        <span onmousedown="down(this)"
+              onmouseup="up(this)"
+              onmouseover="over(this)"
+              onmouseout="out(this)"
+              onwheel="wheel(event,this)"
+              style="display:inline-block">이벤트</span>가 발생합니다.
+    </div>
+    
+    <script>
+        var width=1;
+        function down(a){
+            a.style.fontStyle="italic";
+        }
+        function up(a){
+            a.style.fontStyle="normal";
+        }
+        function over(a){
+            a.style.borderColor="violet";
+        }
+        function out(a){
+            a.style.borderColor="lightgray";
+        }
+        function wheel(e,obj){
+            if(e.wheelDelta <0){
+                width--;
+                if(width<0) width=0;
+            } else {
+                width++;
+            }
+            obj.style.borderStyle="ridge";
+            obj.style.borderWidth=width+"px";
+        }
+    </script>
+    <hr>
+
+    <h2>마우스 이벤트 객체의 프로퍼티와 onmousemove</h2>
+    이미지 위에 마우스를 움직일 때 onmousemove 리스너가 실행되고,
+    마우스의 위치를 보여줍니다.<br><br>
+    <img src="imgs/SJG.png" onmousemove="where(event)"><br><br>
+    <div id="div"></div>
+
+    <script>
+        var div = document.getElementById('div');
+        function where(e){
+            var text = "눌러진 마우스 버튼 = " + e.button + "<br>";
+            text += "스크린을 기준으로 한 좌표(screenX, screenY) = " + e.screenX + "," + e.screenY + "<br>";
+            text += "브라우저 윈도우의 문서 출력 영역 기준(clientX, clientY) = " + e.clientX + "," + e.clientY + "<br>";
+            text += "타겟 객체 내(offsetX, offsetY) = " + e.offsetX + "," + e.offsetY + "<br>";
+            text += "타겟 객체의 부모 객체(x, y) = " + e.x + "," + e.y + "<br>";
+            div.innerHTML = text;
+        }
+    </script>
+    <hr>
+
+    <h2>onload로 이미지 크기 출력</h2>
+    <form>
+        <select id="sel" onchange="changeImage()">
+            <option value="imgs/cat.jpg">고양이</option>
+            <option value="imgs/dog.jpg">강아지</option>
+            <option value="imgs/dochi.jpg">고슴도치</option>
+        </select>
+        <span id="mySpan">이미지 크기</span>
+    </form>
+    <p><img id="myImg" src="imgs/cat.jpg" alt="."></p>
+
+    <script>
+        function changeImage() {
+            var span = document.getElementById('mySpan');
+            var sel = document.getElementById('sel');
+            var img = document.getElementById('myImg');
+
+            img.onload = function() {
+                span.innerHTML = img.width + "x" + img.height;
+            }
+             img.src=sel.value;
+        }
+    </script>
+    <hr>
+
+    <h2>new Image()로 이미지 로딩</h2>
+    이미지를 클릭하면 다음 이미지를 보여줍니다.
+    <img style="border:20px ridge wheat" src="imgs/cat2.jpg" alt="." width="200" height="200" onclick="change(this)">
+
+    <script>
+        var files = ["imgs/dog2.jpg",
+                        "imgs/daram.png",
+                        "imgs/HDI.jpg",
+                        "imgs/SJG.png",
+                        "imgs/dog.jpg",
+                        "imgs/dochi.jpg",
+                        "imgs/sns1.jpg",
+                        "imgs/sns2.jpg",
+                        "imgs/sns3.jpg"];
+        var imgs = new Array();
+        for(var i=0; i<files.length; i++){
+            imgs[i] = new Image();
+            imgs[i].src = files[i];
+        }
+
+        var next = 1;
+        function change(img){
+            img.src = imgs[next].src;
+            next++;
+            next %= imgs.length;
+        }
+    </script>
+    <hr>
+
+    <h2>버튼을 클릭하면 선택된 라디오 버튼의 value를 출력합니다.</h2>
+    <form>
+        <input type="radio" name="city" value="seoul" >서울
+        <input type="radio" name="city" value="busan">부산
+        <input type="radio" name="city" value="chunchen">춘천
+        <input type="button" value="find checked" onclick="findChecked()">
+    </form>
+
+    <script>
+        function findChecked(){
+            var city = document.querySelectorAll('input[type=radio]');
+            for(var i=0; i<city.length; i++){
+                if(city[i].checked) {
+                    var found = city[i];
+                }                
+            }
+
+            if(found != null)
+                alert(found.value + "이 선택됨");
+            else   
+                alert("선택된 것이 없음");
+            
+        }
+    </script>
+    <hr>
+
+    <h2>물품을 선택하면 금액이 자동 계산됩니다.</h2>
+    <form>
+        <input type="checkbox" name="hap" value="10000" onclick="calc(this)">모자 1만원
+        <input type="checkbox" name="shoes" value="30000" onclick="calc(this)">구두 3만원
+        <input type="checkbox" name="bag" value="80000" onclick="calc(this)">명품가방 8만원<br>
+        지불하실 금액 <input type="text" id="sumtext" value="0">
+    </form>
+
+    <script>
+        var sum = 0;
+        function calc(a){
+            var sumTxt = document.getElementById('sumtext');
+            if(a.checked)
+                sum += parseInt(a.value);
+            else
+                sum -= parseInt(a.value);
+
+            sumTxt.value = sum;
+        }
+    </script>
+    <hr>
+
+    <h2>키 리스너와 키 이벤트 객체의 프로퍼티</h2>
+    텍스트 창에 키를 눌러 보세요. Alt, Shift, Ctrl 키도 가능합니다.<br>
+    <input type="text" id="text" onkeydown="whatKeyDown(event)"><br>
+    <div id="box" style="background-color:skyblue; width:250px; height:50px;"></div>
+
+    <script>
+        function whatKeyDown(e){
+            var box = document.getElementById('box');
+            var str = "";
+
+            str += "눌러진 키의 문자열은 : " + e.key + "<br>";
+            str += "눌러진 키의 이름은 : " + e.code + "<br>";
+            box.innerHTML = str;
+        }
+    </script>
+    <hr>
+
+    <h2>이미지에 마우스를 올리고 5초간 그대로 있을 때 사이트로 이동합니다</h2>
+    <img id="img" src="imgs/naver.png" onmouseover="startTimer(5000)" onmouseout="cancelTimer()">
+
+    <script>
+        var img = document.getElementById('img');
+        var timerID = null;
+        function startTimer(time){
+            timerID = setTimeout("load('http://www.naver.com')",time);
+
+            img.title = "타이머 작동 시작...";
+        }
+        function cancelTimer() {
+            if(timerID != null)
+                clearTimeout(timerID);
+        }
+        function load(url){
+            window.location = url;
+        }
+    </script>
+    <hr>
+
+    <h2>텍스트가 자동 회전하며, 마우스로 클릭하면 중단합니다.</h2>
+    <div>
+        <span id="span" style="background-color:yellow">자동 회전하는 텍스트입니다.</span>
+    </div>
+
+    <script>
+        var span = document.getElementById('span');
+        var timerID = setInterval("doRotate()",200);
+
+        span.onclick = function() {
+            clearInterval(timerID);
+        }
+
+        function doRotate() {
+            var str = span.innerHTML;
+            var firstChar = str.substr(0,1);
+            var remains = str.substr(1, str.length-1);
+            str = remains + firstChar;
+            span.innerHTML = str;
+        }
+
+        function startScroll(interval) {
+            setInterval("autoScroll()",interval);
+        }
+
+        function autoScroll() {
+            window.scrollBy(0,10);
+        }
+    </script>
+    <hr>
+
+    <h2>산수 문제를 풀어 봅시다.</h2>
+    문제는 자동으로 생성되며, 10초가 지나면 자동 채점됩니다.
+    <div>남은 시간 <span id="clock">0</span></div>
+    <form>
+        <table>
+            <tr><td class="question"></td><td><input class="answer" type="text" size="8"></td></tr>
+            <tr><td class="question"></td><td><input class="answer" type="text" size="8"></td></tr>
+            <tr><td class="question"></td><td><input class="answer" type="text" size="8"></td></tr>
+            <tr><td class="question"></td><td><input class="answer" type="text" size="8"></td></tr>
+            <tr><td><button type="button" onclick="makeExpression();startTimer()">다시</button></td>
+                <td><span id="score">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        var qArray = document.getElementsByClassName('question');
+        var aArray = document.getElementsByClassName('answer');
+        for(var i=0; i<qArray.length; i++){
+            var number1 = Math.floor(Math.random()*20)+1;
+            var number2 = Math.floor(Math.random()*20)+1;
+            var op = Math.floor(Math.random()*4);
+            var operator="+";
+            switch(op) {
+                case 0 : operator = "+"; break;
+                case 1 : operator = "-"; break;
+                case 2 : operator = "*"; break;
+                case 3 : operator = "/"; break;
+            }
+            qArray[i].innerHTML = number1 + operator + number2;
+            qArray[i].style.textDecoration = "none";
+
+            aArray[i].value="";
+        }
+
+        var clock = document.getElementById('clock');
+        var score = document.getElementById('score');
+        var timerID = null;
+        var countDown = 11;
+
+        function startTimer() {
+
+            score.innerHTML = 0;
+            countDown = 11;
+            if(timerID != null){
+                clearTimeout(timerID);
+            }
+            timeout(clock);
+        }
+
+        function timeout(obj){
+            countDown--;
+            obj.innerHTML = countDown;
+            if(countDown == 0)
+                calc()
+            else    
+                timerID = setTimeout("timeout(clock)",1000);
+        }
+        
+        function calc(){
+            var total = 0;
+            for(var i=0; i<qArray.length; i++) {
+                var question = qArray[i].innerHTML;
+                var correctAnswer = Math.floor(eval(question));
+                var userAnswer = aArray[i].value;
+                if(userAnswer=="" || isNaN(userAnswer)){
+                    total += 0;
+                    qArray[i].style.textDecoration = "line-through";
+                }
+                else if(parseInt(userAnswer) == correctAnswer) {
+                    total += 1;
+                    qArray[i].style.textDecoration = "none";
+                }
+                else {
+                    total += 0;
+                    qArray[i].style.textDecoration = "line-through";
+                }
+            }
+            score.innerHTML = total;
+        }
+    </script>
+</body>
+</html>
